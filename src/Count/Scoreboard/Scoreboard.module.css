@@ -1,11 +1,12 @@
 .main{
-    background-color: aqua;
+    background-color: transparent;
     color: black;
     height: 200px;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 15px;
+    border: 2px solid aqua;
 
 
 }
@@ -14,10 +15,19 @@
     font-size: 50px;
     font-weight: bold;
     margin: 0;
+
+}
+
+.aqua{
+    color: aqua;
 }
 
 .red{
     color: red;
 
+}
+
+.main .text{
+    font-size: 1.5rem;
 }
 

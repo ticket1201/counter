@@ -1,8 +1,15 @@
-.App {
+.App{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-gap: 0 20px;
+}
+
+.inner {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  margin: 0 auto;
+  justify-content: center;
+  gap: 20px;
   background-color: transparent;
   width: 400px;
   height: 300px;
@@ -31,3 +38,4 @@
   height: 50px;
   font-weight: bold;
 }
+

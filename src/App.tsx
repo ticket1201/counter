@@ -1,37 +1,52 @@
 import React, {useState} from 'react';
 import './App.css';
-import {Scoreboard} from './Scoreboard/Scoreboard';
-import {Button} from './Button/Button';
+import Settings from './Settings/Settings';
+import Count from './Count/Count';
 
 
 
 function App() {
 
-    const startCount = 0
-    const maxCount = 5
+    let StorageStartValue = localStorage.getItem('StartCount') || 0
+    let StorageMaxValue = localStorage.getItem('MaxCount') || 5
 
-    const [score, setScore] = useState<number>(startCount)
+    const [startCount, setStartCount] = useState<number>(+StorageStartValue)
+    const [maxCount, setMaxCount] = useState<number>(+StorageMaxValue)
+    const [isChanged, setIsChanged] = useState<boolean>(false)
+    const [error, setError] = useState<boolean>(false)
 
-    const buttonIncHandler = () => {
-        if (score < maxCount) {
-            setScore(score + 1)
-        }
+
+    const changeStartCountHandler = (newValue: number) => {
+        setStartCount(newValue)
+        localStorage.setItem('StartCount', `${newValue}`)
+    }
+    const changeMaxCountHandler = (newValue: number) => {
+        setMaxCount(newValue)
+        localStorage.setItem('MaxCount', `${newValue}`)
     }
 
-    const buttonResetHandler = () => {
-        setScore(0)
+    const changeStatus = () => {
+        setIsChanged(!isChanged)
     }
-
 
 
     return (
         <div className="App">
-            <Scoreboard score={score} maxScore={maxCount}/>
-            <div className={'buttons_wrapper'}>
-                <Button isDisabled={score === maxCount} class={'button'} name={'Inc'} callback={buttonIncHandler}/>
-                <Button isDisabled={score === startCount} class={'button'} name={'Reset'}
-                        callback={buttonResetHandler}/>
-            </div>
+            <Settings
+                startValue={startCount}
+                maxValue={maxCount}
+                changeMaxCountHandler={changeMaxCountHandler}
+                changeStartCountHandler={changeStartCountHandler}
+                isChanged={isChanged}
+                changeStatus={changeStatus}
+                error={error}
+                setError={setError}
+            />
+            <Count
+                error={error}
+                startCount={startCount}
+                maxCount={maxCount}
+                isChanged={isChanged}/>
         </div>
     );
 }

@@ -12,13 +12,12 @@ type CountPropsType = {
 
 const Count = (props:CountPropsType) => {
 
+    const [currentCount, setCurrentCount] = useState<number>(props.startCount)
+
     useEffect( () => {
         setCurrentCount(props.startCount)
     }, [props.startCount])
 
-
-
-    const [currentCount, setCurrentCount] = useState<number>(props.startCount)
 
     const buttonIncHandler = () => {
         if (currentCount < props.maxCount) {

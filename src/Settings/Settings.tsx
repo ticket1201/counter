@@ -19,11 +19,6 @@ const Settings = (props: SettingPropsType) => {
     const [localStartValue, setLocalStartValue] = useState(props.startValue)
 
     useEffect(() => {
-        errorHandler()
-    })
-
-
-    const errorHandler = () => {
         if(localMaxValue <= localStartValue){
             props.setError(true)
         }
@@ -31,7 +26,7 @@ const Settings = (props: SettingPropsType) => {
             props.setError(true)
         }
         else props.setError(false)
-    }
+    }, [localMaxValue,localStartValue])
 
 
     const onChangeMaxHandler = (e: ChangeEvent<HTMLInputElement>) => {
